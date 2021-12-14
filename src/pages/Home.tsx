@@ -5,6 +5,7 @@ import { CurrentWeatherReport } from "../components/layouts/report/CurrentWeathe
 export const Home: React.FC = () => {
   const reportContainerRef = useRef<HTMLDivElement | null>(null);
   const [containerWidth, setContainerWidth] = useState<number | undefined>();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useLayoutEffect(() =>
     setContainerWidth(reportContainerRef.current?.offsetWidth)
   );
