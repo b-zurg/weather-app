@@ -51,6 +51,9 @@ export const translations = {
   searchHere: {
     en: "Search here to get started",
   },
+  countryCode: {
+    en: "Country: {{code}}",
+  },
 };
 
 export type TranslationKey = keyof typeof translations;

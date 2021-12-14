@@ -1,6 +1,7 @@
 import React from "react";
 import cn from "classnames";
 import { City } from "../../../lib/interfaces/Location";
+import { useTranslation } from "../../../localization/TranslationsProvider";
 
 interface CityResultProps {
   city: City;
@@ -13,6 +14,7 @@ export const CityResult: React.FC<CityResultProps> = ({
   onClick,
   isActive,
 }) => {
+  const { t } = useTranslation();
   return (
     <div
       className={cn(
@@ -28,6 +30,9 @@ export const CityResult: React.FC<CityResultProps> = ({
       <div>
         <div className="text-xl">{city.name}</div>
         <div>{city.state}</div>
+      </div>
+      <div className="text-right">
+        {t("countryCode", { code: city.countryCode })}
       </div>
     </div>
   );
