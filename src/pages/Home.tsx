@@ -16,10 +16,7 @@ export const Home: React.FC = () => {
       </div>
       <div className="col-span-1 sm:col-span-2 bg-gray=100 dark: bg-gray-800 pt-8 px-8 flex flex-col place-items-center">
         <CurrentWeatherReport />
-        <div
-          ref={reportContainerRef}
-          className="max-w-[600px] min-w-[200px] pt-12"
-        >
+        <div ref={reportContainerRef} className="w-[50%] min-w-[400px] pt-12">
           {containerWidth && <LineGraphMultiDay width={containerWidth} />}
         </div>
       </div>

@@ -13,8 +13,8 @@ export const CurrentWeatherReport: React.FC = () => {
 
   const { t } = useTranslation();
   const weatherFor = t("weatherFor", {
-    name: currentWeather?.name.toString() ?? "",
-    description: weatherDescription ?? "",
+    name: currentWeather?.name.toString() ?? "...",
+    description: weatherDescription ?? "...",
   });
   return (
     <div className="flex flex-col place-items-center">
@@ -27,7 +27,9 @@ export const CurrentWeatherReport: React.FC = () => {
             [t("feelsLike"), currentWeather?.main.feels_like.toString()],
             [
               t("minMaxTemp"),
-              `${currentWeather?.main.temp_min} / ${currentWeather?.main.temp_min}`,
+              currentWeather
+                ? `${currentWeather.main.temp_min} / ${currentWeather.main.temp_min}`
+                : "",
             ],
             [t("humidity"), currentWeather?.main.humidity.toString()],
           ]}

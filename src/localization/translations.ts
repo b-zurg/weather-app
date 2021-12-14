@@ -22,7 +22,7 @@ export const translations = {
     en: "Humidity",
   },
   temperature: {
-    en: "Temperature",
+    en: "Temperature (celsius)",
   },
   weatherFor: {
     en: "Weather for {{name}} - {{description}}",
