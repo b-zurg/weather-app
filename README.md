@@ -8,6 +8,8 @@ This project was intended to be a simple weather app that would allow one to do 
 1. Turn the app into a PWA
 1. Save local state to local storate
 1. Have the option to integrate with firebase and save the local state to an account
+1. Have a fully qualified country name in the results instead of the country code
+1. Allow to switch the graph to show preciptation, humidity and other daily metrics
 
 # Decisions
 ## Api
