@@ -15,6 +15,8 @@ This project was intended to be a simple weather app that would allow one to do 
 ## Api
 After looking around a bit it seemed like the OpenWeatherMap api was the easiest to jump into with free features.  This turned out to be a mistake. I was overall not very happy with the quality of the API at the end of the project and sometimes it would be very slow.  But it did get the job done.  For example the free api does not seem to provide precipitation information even though it explicitly says it does on its docs. 
 
+It also sometimes does not return forecast information for a city which is quite annoying.
+
 ## State Management
 Over time I've learned that you should treat remote state and local state as two separate things.  For remote state (server requests etc.) I used react query to help me manage it. I also opted to use the natively available fetch api as it does the job fine.
 
