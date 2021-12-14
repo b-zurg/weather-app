@@ -19,7 +19,7 @@ export const CurrentWeatherReport: React.FC = () => {
   return (
     <div className="flex flex-col place-items-center">
       <div className="text-4xl pb-8">{weatherFor}</div>
-      <div className="grid grid-cols-2 md:grid=cols-1 space-x-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 space-y-3 md:space-y-0 md:space-x-3">
         <NamedFields
           title={t("temperature")}
           values={[
