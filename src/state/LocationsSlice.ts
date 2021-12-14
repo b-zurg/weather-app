@@ -39,7 +39,7 @@ export const locationsSlice = createSlice({
     },
     setSelectedDay: (state, action: PayloadAction<string>) => {
       state.selectedDay = action.payload;
-    }
+    },
   },
 });
 
