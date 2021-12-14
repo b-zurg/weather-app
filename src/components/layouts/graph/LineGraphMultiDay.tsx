@@ -20,13 +20,15 @@ export const LineGraphMultiDay: React.FC<LineGraphMultiDayProps> = ({
   const { data } = useForecast(currentLocation?.lat, currentLocation?.lon);
   if (!data) return <></>;
   const itemsGroupedByDay = getForecastItemsGroupedByDay(data.list);
-  console.log({ selectedDay, itemsGroupedByDay });
 
+  const groups = Object.values(itemsGroupedByDay);
+  if (groups.length === 0) return <></>;
   const selectedDayItems = selectedDay
     ? itemsGroupedByDay[selectedDay]
-    : Object.values(itemsGroupedByDay)[0];
+    : groups[0];
   const { points, tempRange, dateRange } =
     extractLineGraphDataFromForecastItems(selectedDayItems);
+  console.log({ points, tempRange, dateRange });
   if (!points || !tempRange || !dateRange) return <></>;
 
   return (

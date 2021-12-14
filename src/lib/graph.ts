@@ -32,7 +32,6 @@ export const extractLineGraphDataFromForecastItems = (
   const setMinMaxTemp = (temp: number) => {
     if (!minTemp || temp < minTemp) {
       minTemp = temp;
-      return;
     }
     if (!maxTemp || temp > maxTemp) {
       maxTemp = temp;
@@ -41,7 +40,6 @@ export const extractLineGraphDataFromForecastItems = (
   const setMinMaxDate = (date: Date) => {
     if (!minDate || date < minDate) {
       minDate = date;
-      return;
     }
     if (!maxDate || date > maxDate) {
       maxDate = date;
