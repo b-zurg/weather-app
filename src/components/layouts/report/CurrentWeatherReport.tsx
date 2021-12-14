@@ -12,13 +12,16 @@ export const CurrentWeatherReport: React.FC = () => {
     .join(",");
 
   const { t } = useTranslation();
-  const weatherFor = t("weatherFor", {
-    name: currentWeather?.name.toString() ?? "...",
-    description: weatherDescription ?? "...",
-  });
+  const description = currentWeather
+    ? t("weatherFor", {
+        name: currentWeather.name.toString() ?? "...",
+        description: weatherDescription ?? "...",
+      })
+    : t("searchFirst");
+
   return (
     <div className="flex flex-col place-items-center">
-      <div className="text-4xl pb-8">{weatherFor}</div>
+      <div className="text-4xl pb-8">{description}</div>
       <div className="grid grid-cols-1 md:grid-cols-2 space-y-3 md:space-y-0 md:space-x-3">
         <NamedFields
           title={t("temperature")}

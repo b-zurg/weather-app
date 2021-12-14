@@ -31,9 +31,9 @@ export const DayButton: React.FC<DayButtonProps> = ({
       className="cursor-pointer w-[6rem] h-[6rem] p-2 rounded-lg flex flex-col hover:shadow-lg bg-gray-600 hover:bg-gray-500 transition ease-in-out align-items-center"
       onClick={onClick}
     >
-      <div className="text-xl text-center">{dayText}</div>
-      <div className="text-sm text-center">{highTranslation}</div>
-      <div className="text-sm text-center">{lowTranslation}</div>
+      <div className="text-xl text-center truncate">{dayText}</div>
+      <div className="text-sm text-center truncate">{highTranslation}</div>
+      <div className="text-sm text-center truncate">{lowTranslation}</div>
     </div>
   );
 };

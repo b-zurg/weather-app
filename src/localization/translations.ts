@@ -51,6 +51,9 @@ export const translations = {
   searchHere: {
     en: "Search here to get started",
   },
+  searchFirst: {
+    en: "Please search for a city to see results",
+  },
   countryCode: {
     en: "Country: {{code}}",
   },
