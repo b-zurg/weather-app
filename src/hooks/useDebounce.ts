@@ -13,6 +13,6 @@ export const useDebounce = <T extends (...args: any[]) => any>(
       }
       timeoutRef.current = setTimeout(() => callback(...args), delay);
     }) as T,
-    [callback, delay]
+    [delay]
   );
 }; 

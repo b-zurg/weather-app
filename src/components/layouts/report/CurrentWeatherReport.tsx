@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useCurrentLocation } from "../../../state/local/hooks/useCurrentLocation";
 import { useCurrentWeather } from "../../../state/remote/hooks/useCurrentWeather";
 import { useTranslation } from "../../../localization/TranslationsProvider";
@@ -7,17 +7,24 @@ import { NamedFields } from "../../organisms/report/NamedFields";
 export const CurrentWeatherReport: React.FC = () => {
   const location = useCurrentLocation();
   const currentWeather = useCurrentWeather(location?.lat, location?.lon).data;
-  const weatherDescription = currentWeather?.weather
-    .map((weather) => weather.description)
-    .join(",");
+  
+  const weatherDescription = useMemo(() => 
+    currentWeather?.weather
+      .map((weather) => weather.description)
+      .join(","),
+    [currentWeather?.weather]
+  );
 
   const { t } = useTranslation();
-  const description = currentWeather
-    ? t("weatherFor", {
-        name: currentWeather.name.toString() ?? "...",
-        description: weatherDescription ?? "...",
-      })
-    : t("searchFirst");
+  const description = useMemo(() => 
+    currentWeather
+      ? t("weatherFor", {
+          name: currentWeather.name.toString() ?? "...",
+          description: weatherDescription ?? "...",
+        })
+      : t("searchFirst"),
+    [currentWeather, weatherDescription, t]
+  );
 
   return (
     <div className="flex flex-col place-items-center">

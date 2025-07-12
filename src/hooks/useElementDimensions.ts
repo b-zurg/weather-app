@@ -1,4 +1,4 @@
-import { MutableRefObject, useEffect, useState } from "react";
+import { MutableRefObject, useLayoutEffect, useState } from "react";
 
 export const useElementDimensions = (
   ref: MutableRefObject<HTMLDivElement | null>
@@ -10,7 +10,7 @@ export const useElementDimensions = (
 
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const handleResize = () => {
       setDimensions(getDimensions());
     };

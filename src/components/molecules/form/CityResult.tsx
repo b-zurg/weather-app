@@ -9,7 +9,7 @@ interface CityResultProps {
   onClick: () => void;
 }
 
-export const CityResult: React.FC<CityResultProps> = ({
+export const CityResult: React.FC<CityResultProps> = React.memo(({
   city,
   onClick,
   isActive,
@@ -36,4 +36,4 @@ export const CityResult: React.FC<CityResultProps> = ({
       </div>
     </div>
   );
-};
+});

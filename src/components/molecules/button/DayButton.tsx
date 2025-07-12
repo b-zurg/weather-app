@@ -8,7 +8,7 @@ interface DayButtonProps {
   temperatures: Omit<TemperatureSnapshot, "current">;
 }
 
-export const DayButton: React.FC<DayButtonProps> = ({
+export const DayButton: React.FC<DayButtonProps> = React.memo(({
   day,
   temperatures,
   onClick,
@@ -36,4 +36,4 @@ export const DayButton: React.FC<DayButtonProps> = ({
       <div className="text-sm text-center truncate">{lowTranslation}</div>
     </div>
   );
-};
+});

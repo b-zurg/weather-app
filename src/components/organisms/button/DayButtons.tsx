@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useCurrentLocation } from "../../../state/local/hooks/useCurrentLocation";
 import { useForecast } from "../../../state/remote/hooks/useForecast";
 import { getDaysInForecast } from "../../../lib/location";
@@ -11,8 +11,13 @@ export const DayButtons: React.FC = () => {
   const dispatch = useAppDispatch();
   const { data } = useForecast(currentLocation?.lat, currentLocation?.lon);
 
+  const handleDayClick = useCallback((day: string) => {
+    dispatch(LocationActions.setSelectedDay(day));
+  }, [dispatch]);
+
   if (!data) return <></>;
   const days = getDaysInForecast(data.list);
+  
   return (
     <div className="flex justify-center space-x-2">
       {Object.entries(days).map(
@@ -22,7 +27,7 @@ export const DayButtons: React.FC = () => {
               key={day}
               day={day}
               temperatures={{ high, low }}
-              onClick={() => dispatch(LocationActions.setSelectedDay(day))}
+              onClick={() => handleDayClick(day)}
             />
           )
       )}

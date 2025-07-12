@@ -9,7 +9,7 @@ interface LocationCardProps {
   temperature: TemperatureSnapshot;
 }
 
-export const LocationCard: React.FC<LocationCardProps> = ({
+export const LocationCard: React.FC<LocationCardProps> = React.memo(({
   name,
   time,
   condition,
@@ -42,4 +42,4 @@ export const LocationCard: React.FC<LocationCardProps> = ({
       </div>
     </div>
   );
-};
+});
