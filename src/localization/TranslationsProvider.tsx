@@ -25,6 +25,7 @@ const useTranslationsProvider = (): TranslationsContextState => {
 
 interface TranslationsProviderProps {
   defaultLanguage?: SupportedLanguage;
+  children: React.ReactNode;
 }
 export const TranslationsProvider: React.FC<TranslationsProviderProps> = ({
   defaultLanguage,

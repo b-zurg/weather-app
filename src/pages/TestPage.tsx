@@ -6,7 +6,11 @@ import { LineGraph } from "../components/organisms/graph/LineGraph";
 import { addHours } from "date-fns";
 import { CitySearch } from "../components/organisms/form/CitySearch";
 
-const ComponentHeader: React.FC = ({ children }) => (
+interface ComponentHeaderProps {
+  children: React.ReactNode;
+}
+
+const ComponentHeader: React.FC<ComponentHeaderProps> = ({ children }) => (
   <>
     <div className="pb-5" />
     <div className="text-2xl pb-5">{children}</div>
