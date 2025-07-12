@@ -60,7 +60,6 @@ export const TestPage: React.FC = () => (
         [addHours(startDate, 10), 2],
         [addHours(startDate, 11), 4],
       ]}
-      xRange={[new Date(2000, 1, 1, 10, 15), new Date(2000, 1, 1, 20, 45)]}
       yRange={[0, 10]}
     />
     <ComponentHeader>City Search</ComponentHeader>

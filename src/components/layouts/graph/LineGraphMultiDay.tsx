@@ -37,7 +37,6 @@ export const LineGraphMultiDay: React.FC<LineGraphMultiDayProps> = ({
         height={200}
         width={width}
         points={points}
-        xRange={dateRange}
         yRange={tempRange}
       />
       <DayButtons />

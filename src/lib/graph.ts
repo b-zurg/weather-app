@@ -1,21 +1,4 @@
-import { Point } from "./interfaces/Graph";
 import { ForecastItem } from "../state/remote/Interfaces/Forecast";
-const mapAndJoinPoints = (points: Point[]) =>
-  points.map((point) => point.join(",")).join(" ");
-
-export const convertPointsToPath = (points: Point[], height?: number) => {
-  if (height === undefined) return mapAndJoinPoints(points);
-  if (points.length === 0) return "";
-  const startPointFloor: Point = [points[0][0], height];
-  const endPointFloor: Point = [points[points.length - 1][0], height];
-  return mapAndJoinPoints([startPointFloor, ...points, endPointFloor]);
-};
-
-// This is to help convert a coordinate system where the bottom left corner is 0,0 to a coordinate system where the top left corner is 0,0 (i.e. svg)
-export const invertPointsYCoordinate = (
-  points: Point[],
-  height: number
-): Point[] => points.map(([x, y]) => [x, height - y]);
 
 export interface LineGraphData {
   points: [Date, number][];

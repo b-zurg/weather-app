@@ -1,17 +1,34 @@
 import React from "react";
-import { Point } from "../../../lib/interfaces/Graph";
-import { scaleTime, scaleLinear, scaleTimeInvert } from "../../../lib/scale";
-import { roundToNearestHour } from "../../../lib/time";
-import { Axis } from "../../molecules/graph/Axis";
-import { Ticks } from "../../molecules/graph/Ticks";
-import { addHours, format } from "date-fns";
-import { FilledLine } from "../../molecules/graph/FilledLine";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+} from "chart.js";
+import { Line } from "react-chartjs-2";
+import { format } from "date-fns";
+
+// Register Chart.js components
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+);
 
 interface LineGraphProps {
   points: [Date, number][];
   width: number;
   height: number;
-  xRange: [Date, Date];
   yRange: [number, number];
 }
 
@@ -19,44 +36,93 @@ export const LineGraph: React.FC<LineGraphProps> = ({
   points,
   width,
   height,
-  xRange,
   yRange,
 }) => {
-  const xScale = scaleTime({ from: xRange, to: [0, width] });
-  const xScaleInvert = scaleTimeInvert({ from: [0, width], to: xRange });
-  const yScale = scaleLinear({ from: yRange, to: [0, height] });
-  const yScaleInvert = scaleLinear({ from: [0, height], to: yRange });
+  // Transform points data for Chart.js
+  const labels = points.map(([date]) => format(date, "H:mm"));
+  const data = points.map(([, value]) => value);
 
-  const scaledPoints = points.map(([x, y]) => [
-    xScale(x),
-    yScale(y),
-  ]) as Point[];
+  const chartData = {
+    labels,
+    datasets: [
+      {
+        label: "Temperature",
+        data,
+        borderColor: "#037a8a",
+        backgroundColor: "rgba(10, 181, 204, 0.3)",
+        borderWidth: 3,
+        fill: true,
+        tension: 0.4,
+        pointRadius: 4,
+        pointHoverRadius: 6,
+      },
+    ],
+  };
 
-  const firstHour = roundToNearestHour(xRange[0], "up");
-  const secondHour = addHours(firstHour, 3);
-  const xScaleStep = xScale(secondHour) - xScale(firstHour);
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false,
+      },
+      tooltip: {
+        mode: "index" as const,
+        intersect: false,
+        callbacks: {
+          title: (context: any) => {
+            const dataIndex = context[0].dataIndex;
+            const date = points[dataIndex][0];
+            return format(date, "MMM dd, H:mm");
+          },
+          label: (context: any) => {
+            return `Temperature: ${context.parsed.y}°C`;
+          },
+        },
+      },
+    },
+    scales: {
+      x: {
+        display: true,
+        title: {
+          display: false,
+        },
+        grid: {
+          display: true,
+          color: "rgba(0, 0, 0, 0.1)",
+        },
+        ticks: {
+          maxTicksLimit: 8,
+          color: "#666",
+        },
+      },
+      y: {
+        display: true,
+        title: {
+          display: false,
+        },
+        grid: {
+          display: true,
+          color: "rgba(0, 0, 0, 0.1)",
+        },
+        ticks: {
+          color: "#666",
+          callback: (value: any) => `${value}°C`,
+        },
+        min: yRange[0],
+        max: yRange[1],
+      },
+    },
+    interaction: {
+      mode: "nearest" as const,
+      axis: "x" as const,
+      intersect: false,
+    },
+  };
+
   return (
-    <div className="relative" style={{ width, height }}>
-      <div className="relative" style={{ top: height }}>
-        <Axis direction="horizontal" length={width} thickness={2} />
-        <Ticks
-          direction="horizontal"
-          length={width}
-          formatTick={(tick) => format(xScaleInvert(tick), "H:mm")}
-          start={xScale(firstHour)}
-          step={xScaleStep}
-        />
-      </div>
-      <div className="relative">
-        <Ticks
-          direction="vertical"
-          length={height}
-          formatTick={(tick) => yScaleInvert(tick).toPrecision(2).toString()}
-          start={0}
-          step={height / 5}
-        />
-      </div>
-      <FilledLine height={height} width={width} points={scaledPoints} />
+    <div style={{ width, height }}>
+      <Line data={chartData} options={options} />
     </div>
   );
 };
