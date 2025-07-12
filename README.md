@@ -68,12 +68,12 @@ The project is using pnpm, so run `pnpm install`
 
 ## 1. `.env` File
 You'll need a .env file filled out with the api key. Copy the `.env.template` file and make an account at https://openweathermap.org/api 
-Then copy your api key in to the value of REACT_APP_OPENMAP_WEATHER_API_KEY
+Then copy your api key in to the value of VITE_OPENMAP_WEATHER_API_KEY
 
 ## 2. Start the app
-`pnpm start` to run it, your browser should open automatically.
+`pnpm dev` to run it, your browser should open automatically.
 
 ## Basic Scripts
-- `pnpm start` starts up dev mode with hot reloading and serves the app at [http://localhost:3000](http://localhost:3000) 
-- `pnpm test` runs all of the jest tests in interactive watch mode
+- `pnpm dev` starts up dev mode with hot reloading and serves the app at [http://localhost:3000](http://localhost:3000) 
+- `pnpm test` runs all of the vitest tests in interactive watch mode
 - `pnpm run build` builds the production application to the `build` folder;

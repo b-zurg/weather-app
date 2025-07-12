@@ -3,7 +3,7 @@ import { CurrentWeather } from "./Interfaces/CurrentWeather";
 import { Forecast } from "./Interfaces/Forecast";
 
 const apiBaseQueryParam: Record<string, string> = {
-  appid: `${process.env.REACT_APP_OPENMAP_WEATHER_API_KEY}`,
+  appid: `${import.meta.env.VITE_OPENMAP_WEATHER_API_KEY}`,
 };
 const generateQueryParameters = (params: Record<string, string>) => {
   const variables = Object.entries({ ...params, ...apiBaseQueryParam })
@@ -14,7 +14,7 @@ const generateQueryParameters = (params: Record<string, string>) => {
 
 const get = <T>(url: string, params: Record<string, string>): Promise<T> =>
   fetch(
-    `${process.env.REACT_APP_OPENMAP_API_BASE}/${url}${generateQueryParameters(
+    `${import.meta.env.VITE_OPENMAP_API_BASE}/${url}${generateQueryParameters(
       params
     )}`
   ).then((response) => {
