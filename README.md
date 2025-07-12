@@ -64,16 +64,16 @@ You should be familiar with
 At the very least google unfamiliar topics before diving into development.
 
 ## 0.5 Clone and install dependencies
-The project is using npm, not yarn so run `npm ci`
+The project is using pnpm, so run `pnpm install`
 
 ## 1. `.env` File
 You'll need a .env file filled out with the api key. Copy the `.env.template` file and make an account at https://openweathermap.org/api 
 Then copy your api key in to the value of REACT_APP_OPENMAP_WEATHER_API_KEY
 
 ## 2. Start the app
-`npm start` to run it, your browser should open automatically.
+`pnpm start` to run it, your browser should open automatically.
 
 ## Basic Scripts
-- `npm start` starts up dev mode with hot reloading and serves the app at [http://localhost:3000](http://localhost:3000) 
-- `npm test` runs all of the jest tests in interactive watch mode
-- `npm run build` builds the production application to the `build` folder;
+- `pnpm start` starts up dev mode with hot reloading and serves the app at [http://localhost:3000](http://localhost:3000) 
+- `pnpm test` runs all of the jest tests in interactive watch mode
+- `pnpm run build` builds the production application to the `build` folder;

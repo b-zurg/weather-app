@@ -28,7 +28,6 @@ export const LineGraphMultiDay: React.FC<LineGraphMultiDayProps> = ({
     : groups[0];
   const { points, tempRange, dateRange } =
     extractLineGraphDataFromForecastItems(selectedDayItems);
-  console.log({ points, tempRange, dateRange });
   if (!points || !tempRange || !dateRange) return <></>;
 
   return (

@@ -12,13 +12,14 @@ export const DayButtons: React.FC = () => {
   const { data } = useForecast(currentLocation?.lat, currentLocation?.lon);
 
   if (!data) return <></>;
-  const days = getDaysInForecast(data?.list);
+  const days = getDaysInForecast(data.list);
   return (
     <div className="flex justify-center space-x-2">
       {Object.entries(days).map(
         ([day, { high, low }], index) =>
           index < 5 && (
             <DayButton
+              key={day}
               day={day}
               temperatures={{ high, low }}
               onClick={() => dispatch(LocationActions.setSelectedDay(day))}

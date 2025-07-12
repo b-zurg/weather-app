@@ -1,7 +1,7 @@
 import { City } from "./interfaces/Location";
-import { ForecastItem } from "../state/remote/Interfaces/Forecast";
 import { startOfDay } from "date-fns";
 import { groupBy } from "lodash";
+import { ForecastItem } from "../state/remote/Interfaces/Forecast";
 
 export const getKeyFromLocation = (location: City) =>
   `${location.lon}-${location.lat}`;
@@ -14,7 +14,6 @@ export const getDaysInForecast = (
   items: ForecastItem[]
 ): ForecastDayDetails => {
   const days: ForecastDayDetails = {};
-
   items.forEach(
     (item) =>
       (days[getDayFromItem(item)] = {

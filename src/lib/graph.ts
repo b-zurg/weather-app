@@ -1,5 +1,5 @@
-import { ForecastItem } from "../state/remote/Interfaces/Forecast";
 import { Point } from "./interfaces/Graph";
+import { ForecastItem } from "../state/remote/Interfaces/Forecast";
 const mapAndJoinPoints = (points: Point[]) =>
   points.map((point) => point.join(",")).join(" ");
 
@@ -30,18 +30,18 @@ export const extractLineGraphDataFromForecastItems = (
   let minDate: Date | undefined = undefined;
   let maxDate: Date | undefined = undefined;
   const setMinMaxTemp = (temp: number) => {
-    if (!minTemp || temp < minTemp) {
+    if (minTemp === undefined || temp < minTemp) {
       minTemp = temp;
     }
-    if (!maxTemp || temp > maxTemp) {
+    if (maxTemp === undefined || temp > maxTemp) {
       maxTemp = temp;
     }
   };
   const setMinMaxDate = (date: Date) => {
-    if (!minDate || date < minDate) {
+    if (minDate === undefined || date < minDate) {
       minDate = date;
     }
-    if (!maxDate || date > maxDate) {
+    if (maxDate === undefined || date > maxDate) {
       maxDate = date;
     }
   };
@@ -56,7 +56,9 @@ export const extractLineGraphDataFromForecastItems = (
 
   return {
     points,
-    dateRange: minDate && maxDate && [minDate, maxDate],
-    tempRange: minTemp && maxTemp && [minTemp, maxTemp],
+    dateRange:
+      minDate !== undefined && maxDate !== undefined ? [minDate, maxDate] : undefined,
+    tempRange:
+      minTemp !== undefined && maxTemp !== undefined ? [minTemp, maxTemp] : undefined,
   };
 };

@@ -1,14 +1,14 @@
 import { LocationResult } from "./Interfaces/Geocoding";
-import { Forecast } from "./Interfaces/Forecast";
 import { CurrentWeather } from "./Interfaces/CurrentWeather";
+import { Forecast } from "./Interfaces/Forecast";
 
 const apiBaseQueryParam: Record<string, string> = {
-  apiKey: `${process.env.REACT_APP_OPENMAP_WEATHER_API_KEY}`,
+  appid: `${process.env.REACT_APP_OPENMAP_WEATHER_API_KEY}`,
 };
 const generateQueryParameters = (params: Record<string, string>) => {
   const variables = Object.entries({ ...params, ...apiBaseQueryParam })
-    .map(([key, value]) => `&${key}=${value}`)
-    .join("");
+    .map(([key, value]) => `${key}=${value}`)
+    .join("&");
   return `?${variables}`;
 };
 
