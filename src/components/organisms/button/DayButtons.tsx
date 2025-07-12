@@ -4,7 +4,7 @@ import { useForecast } from "../../../state/remote/hooks/useForecast";
 import { getDaysInForecast } from "../../../lib/location";
 import { DayButton } from "../../molecules/button/DayButton";
 import { useAppDispatch } from "../../../state/local/AppStore";
-import { LocationActions } from "../../../state/LocationsSlice";
+import { LocationActions } from "../../../state/local/LocationsSlice";
 
 export const DayButtons: React.FC = () => {
   const currentLocation = useCurrentLocation();

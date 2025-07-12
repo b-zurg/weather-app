@@ -1,5 +1,5 @@
 import React from "react";
-import cn from "classnames";
+import clsx from "clsx";
 import { City } from "../../../lib/interfaces/Location";
 import { useTranslation } from "../../../localization/TranslationsProvider";
 
@@ -17,7 +17,7 @@ export const CityResult: React.FC<CityResultProps> = ({
   const { t } = useTranslation();
   return (
     <div
-      className={cn(
+      className={clsx(
         "grid grid-cols-2 p-3 cursor-pointer ease-in-out rounded-lg shadow-lg",
         {
           "bg-gray-200 hover:bg-gray-100 dark:bg-gray-500 dark:hover:bg-gray-400":

@@ -1,14 +1,17 @@
 import React from "react";
-import { debounce } from "lodash";
+import { useDebounce } from "../../../hooks/useDebounce";
+
 interface TextInputProps {
   onChange: (value: string) => void;
   initialValue?: string;
 }
+
 export const TextInput: React.FC<TextInputProps> = ({
   onChange,
   initialValue,
 }) => {
-  const debouncedChange = debounce((value: string) => onChange(value), 300);
+  const debouncedChange = useDebounce((value: string) => onChange(value), 300);
+  
   return (
     <input
       type="text"

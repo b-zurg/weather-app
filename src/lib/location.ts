@@ -1,6 +1,5 @@
 import { City } from "./interfaces/Location";
 import { startOfDay } from "date-fns";
-import { groupBy } from "lodash";
 import { ForecastItem } from "../state/remote/Interfaces/Forecast";
 
 export const getKeyFromLocation = (location: City) =>
@@ -25,4 +24,8 @@ export const getDaysInForecast = (
 };
 
 export const getForecastItemsGroupedByDay = (items: ForecastItem[]) =>
-  groupBy(items, (item) => startOfDay(new Date(item.dt_txt)).toISOString());
+  items.reduce<Record<string, ForecastItem[]>>((grouped, item) => {
+    const day = startOfDay(new Date(item.dt_txt)).toISOString();
+    (grouped[day] = grouped[day] || []).push(item);
+    return grouped;
+  }, {});
