@@ -1,19 +1,15 @@
 import React, { useState } from "react";
 import { TextInput } from "../../molecules/form/TextInput";
-import { useDispatch } from "react-redux";
 import { CityResult } from "../../molecules/form/CityResult";
 import { useCities } from "../../../state/remote/hooks/useCities";
 import { getKeyFromLocation } from "../../../lib/location";
-import { LocationActions } from "../../../state/local/LocationsSlice";
-import { useAppSelector } from "../../../state/local/AppStore";
+import { useLocationStore } from "../../../state/local/AppStore";
 import { useTranslation } from "../../../localization/TranslationsProvider";
 
 export const CitySearch: React.FC = () => {
-  const dispatch = useDispatch();
   const { t } = useTranslation();
-  const currentCity = useAppSelector(
-    (state) => state.locations.currentLocation
-  );
+  const currentCity = useLocationStore((state) => state.currentLocation);
+  const setCurrentLocation = useLocationStore((state) => state.setCurrentLocation);
   const [searchValue, setSearchValue] = useState<string | undefined>();
   const { data } = useCities(searchValue);
 
@@ -32,7 +28,7 @@ export const CitySearch: React.FC = () => {
               key={getKeyFromLocation(city)}
               city={city}
               isActive={isActive}
-              onClick={() => dispatch(LocationActions.setCurrentLocation(city))}
+              onClick={() => setCurrentLocation(city)}
             />
           );
         })}

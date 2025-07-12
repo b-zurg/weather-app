@@ -1,8 +1,8 @@
-import { useAppSelector } from "../AppStore";
+import { useLocationStore } from "../AppStore";
 
 export const useCurrentLocation = () =>
-  useAppSelector(({ locations }) => {
-    const locationKey = locations.currentLocation;
+  useLocationStore((state) => {
+    const locationKey = state.currentLocation;
     if (!locationKey) return;
-    return locations.locations[locationKey];
+    return state.locations[locationKey];
   });

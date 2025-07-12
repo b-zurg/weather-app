@@ -1,15 +1,63 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { LocationReducer } from "./LocationsSlice";
+import { create } from "zustand";
+import { City } from "../../lib/interfaces/Location";
+import { getKeyFromLocation } from "../../lib/location";
+import { logError } from "../../lib/logging";
 
-export const AppStore = configureStore({
-  reducer: {
-    locations: LocationReducer,
+export interface LocationState {
+  locations: Record<string, City>;
+  currentLocation: string | null;
+  selectedDay: string | null;
+}
+
+interface LocationStore extends LocationState {
+  addLocation: (location: City) => void;
+  removeLocation: (key: string) => void;
+  setCurrentLocation: (location: City) => void;
+  setSelectedDay: (day: string) => void;
+}
+
+export const useLocationStore = create<LocationStore>((set, get) => ({
+  locations: {},
+  currentLocation: null,
+  selectedDay: null,
+  
+  addLocation: (location: City) => {
+    const key = getKeyFromLocation(location);
+    set((state) => ({
+      locations: {
+        ...state.locations,
+        [key]: location,
+      },
+    }));
   },
-});
-
-export type AppState = ReturnType<typeof AppStore.getState>;
-export type AppDispatch = typeof AppStore.dispatch;
-
-export const useAppDispatch = () => useDispatch<AppDispatch>();
-export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector;
+  
+  removeLocation: (key: string) => {
+    const state = get();
+    if (!state.locations[key]) {
+      logError(
+        `Tried to remove location with id ${key} when it doesn't exist in the current locations`
+      );
+      return;
+    }
+    set((state) => {
+      const newLocations = { ...state.locations };
+      delete newLocations[key];
+      return { locations: newLocations };
+    });
+  },
+  
+  setCurrentLocation: (location: City) => {
+    const key = getKeyFromLocation(location);
+    set((state) => ({
+      locations: {
+        ...state.locations,
+        [key]: location,
+      },
+      currentLocation: key,
+    }));
+  },
+  
+  setSelectedDay: (day: string) => {
+    set({ selectedDay: day });
+  },
+}));

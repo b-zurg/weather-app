@@ -5,7 +5,7 @@ import { extractLineGraphDataFromForecastItems } from "../../../lib/graph";
 import { useCurrentLocation } from "../../../state/local/hooks/useCurrentLocation";
 import { getForecastItemsGroupedByDay } from "../../../lib/location";
 import { DayButtons } from "../../organisms/button/DayButtons";
-import { useAppSelector } from "../../../state/local/AppStore";
+import { useLocationStore } from "../../../state/local/AppStore";
 import { useTranslation } from "../../../localization/TranslationsProvider";
 
 interface LineGraphMultiDayProps {
@@ -16,7 +16,7 @@ export const LineGraphMultiDay: React.FC<LineGraphMultiDayProps> = ({
 }) => {
   const currentLocation = useCurrentLocation();
   const { t } = useTranslation();
-  const selectedDay = useAppSelector((state) => state.locations.selectedDay);
+  const selectedDay = useLocationStore((state) => state.selectedDay);
   const { data } = useForecast(currentLocation?.lat, currentLocation?.lon);
   if (!data) return <></>;
   const itemsGroupedByDay = getForecastItemsGroupedByDay(data.list);

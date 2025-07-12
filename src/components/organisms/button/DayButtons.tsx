@@ -3,17 +3,16 @@ import { useCurrentLocation } from "../../../state/local/hooks/useCurrentLocatio
 import { useForecast } from "../../../state/remote/hooks/useForecast";
 import { getDaysInForecast } from "../../../lib/location";
 import { DayButton } from "../../molecules/button/DayButton";
-import { useAppDispatch } from "../../../state/local/AppStore";
-import { LocationActions } from "../../../state/local/LocationsSlice";
+import { useLocationStore } from "../../../state/local/AppStore";
 
 export const DayButtons: React.FC = () => {
   const currentLocation = useCurrentLocation();
-  const dispatch = useAppDispatch();
+  const setSelectedDay = useLocationStore((state) => state.setSelectedDay);
   const { data } = useForecast(currentLocation?.lat, currentLocation?.lon);
 
   const handleDayClick = useCallback((day: string) => {
-    dispatch(LocationActions.setSelectedDay(day));
-  }, [dispatch]);
+    setSelectedDay(day);
+  }, [setSelectedDay]);
 
   if (!data) return <></>;
   const days = getDaysInForecast(data.list);
