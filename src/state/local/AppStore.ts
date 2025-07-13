@@ -6,20 +6,17 @@ import { logError } from "../../lib/logging";
 export interface LocationState {
   locations: Record<string, City>;
   currentLocation: string | null;
-  selectedDay: string | null;
 }
 
 interface LocationStore extends LocationState {
   addLocation: (location: City) => void;
   removeLocation: (key: string) => void;
   setCurrentLocation: (location: City) => void;
-  setSelectedDay: (day: string) => void;
 }
 
 export const useLocationStore = create<LocationStore>((set, get) => ({
   locations: {},
   currentLocation: null,
-  selectedDay: null,
   
   addLocation: (location: City) => {
     const key = getKeyFromLocation(location);
@@ -55,9 +52,5 @@ export const useLocationStore = create<LocationStore>((set, get) => ({
       },
       currentLocation: key,
     }));
-  },
-  
-  setSelectedDay: (day: string) => {
-    set({ selectedDay: day });
   },
 }));

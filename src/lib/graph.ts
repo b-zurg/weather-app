@@ -8,6 +8,10 @@ export interface LineGraphData {
 export const extractLineGraphDataFromForecastItems = (
   items?: ForecastItem[]
 ): Partial<LineGraphData> => {
+  if (!items || items.length === 0) {
+    return {};
+  }
+  
   let minTemp: number | undefined = undefined;
   let maxTemp: number | undefined = undefined;
   let minDate: Date | undefined = undefined;
